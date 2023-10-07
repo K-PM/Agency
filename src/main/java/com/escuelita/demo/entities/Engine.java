@@ -1,0 +1,27 @@
+package com.escuelita.demo.entities;
+
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+import javax.persistence.*;
+
+@Entity
+@Getter @Setter
+@Table(name = "Engines")
+public class Engine {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String cylinder;
+
+    @Column(nullable = false)
+    private String engineType;
+
+    @OneToOne(mappedBy = "engine",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Vehicle vehicle;
+
+}
